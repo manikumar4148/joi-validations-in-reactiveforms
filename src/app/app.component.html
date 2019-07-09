@@ -1,0 +1,179 @@
+<!-- The content below is only a placeholder and can be replaced.
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<h2>Here are some links to help you start: </h2>
+<ul>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
+  </li>
+  <li>
+    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+  </li>
+</ul> -->
+
+<div style="text-align:center">
+
+  <h3 style="color:blue"> Registration Form(ReactiveForms) </h3>
+</div>
+<form [formGroup]="studentform" name="form" (ngSubmit)="studentform.valid"novalidate>
+  <table align="center">
+    <tr>
+        <td>First Name:</td>
+        <td>Last Name:</td>   
+    </tr>
+    <tr>
+      <td><input type="text" class="form-control" formControlName="fname" ></td>
+      <td><input type="text" formControlName="lname" class="form-control"></td>
+  </tr>
+  <tr>
+    <td><div *ngIf="studentform.controls['fname'].invalid && (studentform.controls['fname'].dirty || studentform.controls['fname'].touched)">
+      <div *ngIf="studentform.controls['fname'].errors.required" class="error">
+        please enter frist name
+      </div>
+      <div *ngIf="studentform.controls['fname'].errors.minlength" class="error">
+         first name mush be minimum 4 charecters
+        </div>
+    </div>
+    </td>
+    <td>
+        <td><div *ngIf="studentform.controls['lname'].invalid && (studentform.controls['lname'].dirty || studentform.controls['lname'].touched)">
+            <div *ngIf="studentform.controls['lname'].errors.required" class="error">
+              please enter last name
+            </div>
+            <div *ngIf="studentform.controls['lname'].errors.minlength" class="error">
+          last name must be minimum 4 charecters
+              </div>
+          </div>
+          </td>
+   
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td>Date OF Birth:</td>   
+</tr>
+  <tr>
+    <td><input type="text" class="form-control" formControlName="email"></td>
+    <!-- <td><input type="date" class="form-control" formControlName="dob"></td> -->
+    <td><my-date-picker name="dob" [options]="myDatePickerOptions"
+      formControlName="dob"></my-date-picker></td>
+  </tr>
+  <tr>
+      <td><div *ngIf="studentform.controls['email'].invalid && (studentform.controls['email'].dirty || studentform.controls['email'].touched)">
+        <div *ngIf="studentform.controls['email'].errors.required" class="error">
+          please enter email id
+        </div>
+        <div *ngIf="studentform.controls['email'].errors.pattern" class="error">
+           please enter valid email
+          </div>
+      </div>
+      </td>
+      <td>
+          <td><div *ngIf="studentform.controls['dob'].invalid && (studentform.controls['dob'].dirty || studentform.controls['dob'].touched)">
+              <div *ngIf="studentform.controls['dob'].errors.required" class="error">
+                please enter date of birth
+              </div>
+              </div>
+
+      </td>
+  </tr> 
+  <tr>
+    <td>Gender:</td>
+    <td><input type="radio" name="gender" value="male" class="form-control" formControlName="gender">male<br>
+      <input type="radio" name="gender" value="female" class="form-control" formControlName="gender">female
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <div *ngIf="studentform.controls['gender'].invalid && (studentform.controls['gender'].dirty || studentform.controls['gender'].touched)">
+        please select gender
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>Mobile</td>
+    <td>Address</td>
+  </tr>
+  <tr>
+    <td><input type="text" name="phone" class="form-control" formControlName="phone" onkeypress="return (event.charCode >= 48 && event.charCode <= 57) "></td>
+    <td><textarea rows="4" cols="20" class="form-control" formControlName="address"></textarea></td>
+  </tr>
+  <tr>
+    <td><div *ngIf="studentform.controls['phone'].invalid && (studentform.controls['phone'].dirty || studentform.controls['phone'].touched)">
+      please enter phone number
+      <div *ngIf="studentform.controls['phone'].errors.minlength" class="error">
+          last phone number must be 10 charecters
+              </div>
+          
+      </div>
+    </td>
+    <td><div *ngIf="studentform.controls['address'].invalid && (studentform.controls['address'].dirty || studentform.controls['address'].touched)">
+        please enter address
+      
+            
+        </div>
+      </td>
+  </tr>
+
+  <tr>
+          <td>College</td>
+          <td>Branch</td>
+        </tr>
+        <tr>
+          <td><select id="selectc" value="-1" name="selectc" class="form-control" formControlName="selectc">
+          <option disabled selected value="-1">--select College--</option>
+        <option >Srinivasa Engineering college</option>
+        <option >BVC Engineering college</option>
+        <option >Raghu Engineering college</option>
+      
+        </select></td>
+        <td><select id="selectb" value="-1" name="selectb" class="form-control" formControlName="selectb">
+          <option disabled selectedvalue="-1">--select branch--</option>
+        <option>EEE</option>
+        <option>ECE</option>
+        <option>CSE</option>
+      
+        </select></td>
+    </tr>
+    <tr>
+        <td><div *ngIf="studentform.controls['selectc'].invalid && (studentform.controls['selectc'].dirty || studentform.controls['selectc'].touched)">
+          please select college
+                  </div>
+              
+        
+        </td>
+        <td><div *ngIf="studentform.controls['selectb'].invalid && (studentform.controls['selectb'].dirty || studentform.controls['selectb'].touched)">
+            please select branch
+          
+                
+            </div>
+          </td>
+      </tr>
+  </table>
+  <button class="bt"(click)="submit(studentform.value)" type="submit" 
+  [disabled]="studentform.pristine || studentform.invalid">Submit</button>
+  </form>
+ 
+    <table>
+      <tr *ngFor="let i of arr">
+        <td>First Name: {{i.fname}}</td><br>
+        <td>Last Name:{{i.lname}}</td><br>
+        <td>Email ID{{i.email}}</td><br>
+        <td>Date Of Birth{{i.dob}}</td><br>
+        <td>Gender{{i.gender}}</td><br>
+        <td>Phone No.{{i.phone}}</td><br>
+        <td>Address{{i.address}}</td><br>
+        <td>College{{i.selectc}}</td><br>
+        <td>Branch{{i.selectb}}</td>
+      </tr>
+    </table>
+
+
+<router-outlet></router-outlet>
